@@ -1,0 +1,230 @@
+.discipline-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  .discipline-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+.discipline-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.discipline-card .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.discipline-card .title-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.discipline-card h2 {
+  font-size: 1.4rem;
+  margin: 0;
+  color: #fff;
+}
+
+.confidence-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.discipline-card .description {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.stats-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-val {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.action-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.reset-btn {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: #ef4444 !important;
+  border: 1px solid rgba(239, 68, 68, 0.2) !important;
+}
+
+.reset-btn:hover {
+  background: rgba(239, 68, 68, 0.2) !important;
+}
+
+/* ── Sleep Card ───────────────────────────────────────────── */
+.sleep-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sleep-stats-row {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 16px 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.sleep-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sleep-time-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 480px) {
+  .sleep-time-inputs {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sleep-analysis-box {
+  padding: 14px 16px;
+  border-radius: 10px;
+  border-left: 4px solid;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sleep-detail-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sleep-locked {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 10px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* ── Sleep History ─────────────────────────────────────── */
+.sleep-history {
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding-top: 16px;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sleep-log-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.sleep-log-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sleep-log-date {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.sleep-log-time {
+  font-size: 0.95rem;
+  color: #e4e4e7;
+  font-weight: 500;
+}
+
+.sleep-log-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sleep-log-dur {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #818cf8;
+}
+
+.sleep-log-badge {
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+

@@ -1,0 +1,188 @@
+.water-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.water-header-premium {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.water-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.water-icon-wrapper {
+  background: rgba(0, 204, 255, 0.15);
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.water-icon {
+  color: #00ccff;
+  fill: #00ccff;
+}
+
+.water-stats .current {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.water-stats .target {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.premium-progress-container {
+  width: 100%;
+}
+
+.premium-progress-bg {
+  width: 100%;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.premium-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0088ff 0%, #00e5ff 100%);
+  border-radius: 10px;
+  position: relative;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+  overflow: hidden;
+}
+
+.fluid-wave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, 
+    rgba(255,255,255,0) 0%, 
+    rgba(255,255,255,0.3) 50%, 
+    rgba(255,255,255,0) 100%);
+  animation: wave 2s infinite linear;
+  background-size: 200% 100%;
+}
+
+@keyframes wave {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.water-custom-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0,0,0,0.2);
+  padding: 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.water-input {
+  flex: 1;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0.25rem 0.5rem !important;
+  font-size: 1rem;
+}
+
+.water-input:focus {
+  outline: none;
+}
+
+/* Hide number input spinners */
+.water-input::-webkit-outer-spin-button,
+.water-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.ml-label {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  padding-right: 0.5rem;
+}
+
+.water-custom-btn {
+  padding: 0.4rem 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+}
+
+/* Quick add buttons */
+.water-quick-btns {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.water-quick-btn {
+  padding: 6px 4px !important;
+  font-size: 0.78rem !important;
+  text-align: center;
+  justify-content: center;
+}
+
+/* History */
+.water-history {
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.water-history-title {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+  margin: 0 0 6px;
+}
+
+.water-log-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 10px;
+  background: rgba(0,204,255,0.05);
+  border-radius: 6px;
+  border: 1px solid rgba(0,204,255,0.08);
+}
+
+.water-log-time {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.water-log-amount {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #00ccff;
+}
+

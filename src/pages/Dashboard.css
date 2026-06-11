@@ -1,0 +1,28 @@
+.dashboard-container {
+  padding: 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 3rem;
+  margin-bottom: -1rem;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+/* Full-width items (hero, prompts) */
+.dashboard-grid > *:first-child[class*="glass-panel"][style*="gridColumn"],
+.glass-panel[style*="gridColumn: 1 / -1"] {
+  grid-column: 1 / -1;
+}

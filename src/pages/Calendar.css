@@ -1,0 +1,182 @@
+@import 'react-calendar/dist/Calendar.css';
+
+.calendar-container {
+  padding: 2rem 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.calendar-card {
+  padding: 1.5rem;
+  border-radius: 20px;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.calendar-header h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Override react-calendar */
+.react-calendar {
+  width: 100%;
+  max-width: 100%;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  color: var(--text-primary);
+}
+
+.react-calendar__navigation button {
+  color: var(--text-primary);
+  min-width: 44px;
+  background: none;
+  font-size: 1.1rem;
+  margin-top: 8px;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.react-calendar__month-view__weekdays {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.75em;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.react-calendar__month-view__weekdays__weekday abbr {
+  text-decoration: none;
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.react-calendar__tile {
+  background: none;
+  color: var(--text-primary);
+  padding: 1.5em 0.5em; /* Taller tiles */
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: visible;
+  border: 1px solid transparent;
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.react-calendar__tile--now {
+  background: rgba(118, 185, 0, 0.1) !important;
+  color: #a3e635;
+}
+
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
+  background: rgba(118, 185, 0, 0.2) !important;
+}
+
+.react-calendar__tile--active {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #4a7500 100%) !important;
+  color: #000 !important;
+  box-shadow: 0 8px 24px rgba(118, 185, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.4) !important;
+  font-weight: bold;
+}
+
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+  background: linear-gradient(135deg, var(--primary-hover) 0%, #5a8500 100%) !important;
+  transform: scale(1.05);
+}
+
+.calendar-dot {
+  height: 8px;
+  width: 8px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  margin: 4px auto 0;
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 10px var(--primary-glow);
+}
+
+.react-calendar__tile--active .calendar-dot {
+  background-color: #000;
+  box-shadow: none;
+}
+
+/* Detailed Metrics Card */
+.daily-detail-card {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.detail-date {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.detail-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.detail-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+}
+
+.detail-metric.intake { border-bottom: 3px solid rgba(118, 185, 0, 0.6); }
+.detail-metric.burned { border-bottom: 3px solid rgba(255, 59, 48, 0.6); }
+.detail-metric.deficit { border-bottom: 3px solid var(--primary-color); }
+
+.detail-metric .label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.detail-metric .value {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.no-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
