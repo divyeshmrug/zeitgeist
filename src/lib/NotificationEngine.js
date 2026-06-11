@@ -134,7 +134,7 @@ class NotificationEngineV5 {
   // ==========================================
   async subscribeToPush() {
     try {
-      const VAPID_PUBLIC_KEY = 'BEWH V67GIo0qZMAwah11Pv72GKq32X0aK-4S0MfjQE5akkcbFrZnOulxFfR8QxfJpN-hBHeTEl8JQ13zQ4LcZgA';
+      const VAPID_PUBLIC_KEY = 'BEWHV67GIo0qZMAwah11Pv72GKq32X0aK-4S0MfjQE5akkcbFrZnOulxFfR8QxfJpN-hBHeTEl8JQ13zQ4LcZgA';
 
       const urlBase64ToUint8Array = (base64String) => {
         const padding = '='.repeat((4 - base64String.length % 4) % 4);
