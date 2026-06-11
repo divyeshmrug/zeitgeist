@@ -345,8 +345,8 @@ class NotificationEngineV5 {
           
           const options = {
             body: notif.message,
-            icon: '/fitai-logo-192.png',
-            badge: '/fitai-badge-white.png',
+            icon: '/fitai-logo-192.png?v=2',
+            badge: '/fitai-badge-white.png?v=2',
             vibrate: [200, 100, 200],
             data: notif.action_url || '/',
             requireInteraction: requireInteraction

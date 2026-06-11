@@ -24,8 +24,8 @@ self.addEventListener('push', (event) => {
   const title = data.title || 'FitAI Elite Coach';
   const options = {
     body: data.body || data.message || 'You have a new message.',
-    icon: '/fitai-logo-192.png',
-    badge: '/fitai-badge-white.png',
+    icon: '/fitai-logo-192.png?v=2',
+    badge: '/fitai-badge-white.png?v=2',
     vibrate: [200, 100, 200],
     data: { url: data.action_url || '/' },
     requireInteraction: data.priority === 'HIGH',
