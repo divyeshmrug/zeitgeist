@@ -137,8 +137,10 @@ class NotificationEngineV5 {
       const VAPID_PUBLIC_KEY = 'BEWHV67GIo0qZMAwah11Pv72GKq32X0aK-4S0MfjQE5akkcbFrZnOulxFfR8QxfJpN-hBHeTEl8JQ13zQ4LcZgA';
 
       const urlBase64ToUint8Array = (base64String) => {
-        const padding = '='.repeat((4 - base64String.length % 4) % 4);
-        const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+        // Strip any accidental whitespace (like from env vars)
+        const cleanString = base64String.replace(/\s+/g, '');
+        const padding = '='.repeat((4 - cleanString.length % 4) % 4);
+        const base64 = (cleanString + padding).replace(/-/g, '+').replace(/_/g, '/');
         const rawData = window.atob(base64);
         const outputArray = new Uint8Array(rawData.length);
         for (let i = 0; i < rawData.length; ++i) {
