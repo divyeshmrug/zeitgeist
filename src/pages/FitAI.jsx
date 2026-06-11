@@ -160,10 +160,6 @@ export default function FitAI() {
                         <span style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', marginBottom: '4px' }}>Reasoning</span>
                         <span style={{ fontSize: '0.85rem' }}>{msg.reasoning}</span>
                       </div>
-                      <div>
-                        <span style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', marginBottom: '4px' }}>Confidence</span>
-                        <span style={{ fontSize: '1.2rem', fontWeight: 700, color: '#4ade80' }}>{msg.confidence}</span>
-                      </div>
                     </div>
                     <div className="recommendation-section">
                       <span style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', marginBottom: '4px' }}>Recommendation</span>
