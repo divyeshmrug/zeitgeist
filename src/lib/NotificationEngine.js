@@ -120,6 +120,52 @@ class NotificationEngineV5 {
     if ('serviceWorker' in navigator) {
       this.swRegistration = await navigator.serviceWorker.ready;
     }
+
+    // Subscribe to Web Push for true background notifications
+    if (this.hasPermission && this.swRegistration) {
+      await this.subscribeToPush();
+    }
+  }
+
+  // ==========================================
+  // WEB PUSH SUBSCRIPTION
+  // Saves browser push endpoint to Supabase
+  // so server can send even when app is closed
+  // ==========================================
+  async subscribeToPush() {
+    try {
+      const VAPID_PUBLIC_KEY = 'BEWH V67GIo0qZMAwah11Pv72GKq32X0aK-4S0MfjQE5akkcbFrZnOulxFfR8QxfJpN-hBHeTEl8JQ13zQ4LcZgA';
+
+      const urlBase64ToUint8Array = (base64String) => {
+        const padding = '='.repeat((4 - base64String.length % 4) % 4);
+        const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+        const rawData = window.atob(base64);
+        const outputArray = new Uint8Array(rawData.length);
+        for (let i = 0; i < rawData.length; ++i) {
+          outputArray[i] = rawData.charCodeAt(i);
+        }
+        return outputArray;
+      };
+
+      const subscription = await this.swRegistration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(import.meta.env.VITE_VAPID_PUBLIC_KEY || VAPID_PUBLIC_KEY)
+      });
+
+      const subJson = subscription.toJSON();
+
+      // Save to Supabase — upsert so no duplicates
+      await supabase.from('push_subscriptions').upsert({
+        user_id: this.userId,
+        endpoint: subJson.endpoint,
+        p256dh: subJson.keys.p256dh,
+        auth: subJson.keys.auth
+      }, { onConflict: 'endpoint' });
+
+      console.log('[NotificationEngine] Push subscription saved ✅');
+    } catch (err) {
+      console.warn('[NotificationEngine] Push subscription failed (normal in dev/Safari):', err.message);
+    }
   }
 
   // Check cooldown from Database

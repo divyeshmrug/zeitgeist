@@ -186,3 +186,20 @@ ALTER TABLE public.notification_stats ADD COLUMN IF NOT EXISTS opened_count INTE
 ALTER TABLE public.notification_stats ADD COLUMN IF NOT EXISTS clicked_count INTEGER DEFAULT 0;
 ALTER TABLE public.notification_stats ADD COLUMN IF NOT EXISTS dismissed_count INTEGER DEFAULT 0;
 ALTER TABLE public.notification_stats ADD COLUMN IF NOT EXISTS response_rate NUMERIC DEFAULT 0.0;
+
+-- ====================================================
+-- WEB PUSH SUBSCRIPTIONS TABLE
+-- Stores browser push subscriptions for background notifications
+-- ====================================================
+CREATE TABLE IF NOT EXISTS public.push_subscriptions (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE,
+    endpoint TEXT NOT NULL UNIQUE,
+    p256dh TEXT NOT NULL,
+    auth TEXT NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE public.push_subscriptions ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Users can manage own subscriptions" ON public.push_subscriptions
+    FOR ALL USING (auth.uid() = user_id);
