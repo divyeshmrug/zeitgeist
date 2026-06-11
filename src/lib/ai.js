@@ -1,6 +1,7 @@
 // src/lib/ai.js
 
 const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY || '';
+const GROQ_FITAI_KEY = import.meta.env.VITE_GROQ_FITAI_KEY || '';
 
 export async function analyzeFoodWithAI(description) {
   if (!GROQ_API_KEY) {
@@ -498,5 +499,56 @@ Target: Sleep before 11:15 PM, 7-9 hours duration.`;
   } catch (error) {
     console.error("Failed to analyze sleep via Groq:", error);
     return { sleep_quality: "good", ai_message: "Keep up the good sleep habits!", confidence_bonus: 1 };
+  }
+}
+
+export async function askFitAIAssistant(conversationHistory, userProfile) {
+  if (!GROQ_FITAI_KEY) {
+    console.warn("No Groq FitAI Key found. Returning mock response.");
+    return {
+      summary: "I am not connected to the AI yet.",
+      confidence: "0%",
+      reasoning: "Missing VITE_GROQ_FITAI_KEY in Vercel settings.",
+      recommendation: "Please add the key.",
+      nextAction: "Add VITE_GROQ_FITAI_KEY to Vercel and redeploy."
+    };
+  }
+
+  const systemPrompt = `You are FitAI Elite, an advanced, highly knowledgeable, and motivational personal trainer and health assistant.
+You provide very concise, structured, and actionable advice.
+Always consider the user's profile if available: Age ${userProfile?.age || 'N/A'}, Goal: ${userProfile?.goal_type || 'N/A'}, Diet: ${userProfile?.diet_preference || 'N/A'}.
+
+You must ALWAYS return your response as a valid JSON object matching exactly this structure:
+{
+  "summary": "A 1-sentence high-level answer.",
+  "reasoning": "A 1-2 sentence explanation of why you suggest this.",
+  "confidence": "A percentage like '95%' indicating how sure you are.",
+  "recommendation": "A 1-sentence actionable recommendation.",
+  "nextAction": "The immediate next step the user should take right now."
+}
+Do not include markdown blocks, just the raw JSON object.`;
+
+  try {
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${GROQ_FITAI_KEY}`
+      },
+      body: JSON.stringify({
+        model: 'llama-3.3-70b-versatile',
+        messages: [
+          { role: 'system', content: systemPrompt },
+          ...conversationHistory
+        ],
+        response_format: { type: "json_object" }
+      })
+    });
+
+    const data = await response.json();
+    return JSON.parse(data.choices[0].message.content);
+  } catch (error) {
+    console.error("Failed to fetch FitAI response via Groq:", error);
+    throw error;
   }
 }

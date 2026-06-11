@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Brain, Search, Plus, MessageSquare, Trash2, Send, Activity, Sparkles, ChevronRight } from 'lucide-react';
+import { askFitAIAssistant } from '../lib/ai';
 import './FitAI.css';
 
 export default function FitAI() {
@@ -13,23 +14,44 @@ export default function FitAI() {
     { text: "Review my recovery score.", icon: <Brain size={16} /> }
   ];
 
-  const handleSend = (text) => {
+  const handleSend = async (text) => {
     if (!text.trim()) return;
-    setMessages(prev => [...prev, { role: 'user', content: text }]);
+    
+    const newMsg = { role: 'user', content: text };
+    const updatedMessages = [...messages, newMsg];
+    setMessages(updatedMessages);
     setInput('');
     setIsTyping(true);
 
-    setTimeout(() => {
-      setIsTyping(false);
+    try {
+      const aiResponse = await askFitAIAssistant(
+        updatedMessages.filter(m => m.role === 'user' || m.role === 'assistant').map(m => ({
+          role: m.role === 'ai' ? 'assistant' : m.role,
+          content: m.content || JSON.stringify(m) 
+        })),
+        {} // Pass user profile here if you have it in state
+      );
+
       setMessages(prev => [...prev, {
         role: 'ai',
-        summary: "Your recovery is excellent.",
-        confidence: "91%",
-        reasoning: "Hydration target achieved. Sleep quality improved. Protein intake acceptable.",
-        recommendation: "Moderate workout recommended.",
-        nextAction: "Drink 500ml water before lunch."
+        summary: aiResponse.summary,
+        confidence: aiResponse.confidence,
+        reasoning: aiResponse.reasoning,
+        recommendation: aiResponse.recommendation,
+        nextAction: aiResponse.nextAction
       }]);
-    }, 1500);
+    } catch (error) {
+      setMessages(prev => [...prev, {
+        role: 'ai',
+        summary: "Error connecting to AI.",
+        confidence: "0%",
+        reasoning: "The connection to Groq API failed.",
+        recommendation: "Please check your API key.",
+        nextAction: "Try again later."
+      }]);
+    } finally {
+      setIsTyping(false);
+    }
   };
 
   return (
