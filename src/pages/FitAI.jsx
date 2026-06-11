@@ -1,12 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Brain, Search, Plus, MessageSquare, Trash2, Send, Activity, Sparkles, ChevronRight } from 'lucide-react';
 import { askFitAIAssistant } from '../lib/ai';
+import { supabase } from '../lib/supabase';
 import './FitAI.css';
 
 export default function FitAI() {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
+  const [userProfile, setUserProfile] = useState({});
+
+  useEffect(() => {
+    async function fetchProfile() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data } = await supabase.from('profiles').select('*').eq('id', user.id).single();
+        if (data) setUserProfile(data);
+      }
+    }
+    fetchProfile();
+  }, []);
 
   const suggestions = [
     { text: "What should I focus on today?", icon: <Activity size={16} /> },
@@ -29,7 +42,7 @@ export default function FitAI() {
           role: m.role === 'ai' ? 'assistant' : m.role,
           content: m.content || JSON.stringify(m) 
         })),
-        {} // Pass user profile here if you have it in state
+        userProfile // Now passing the real user profile fetched from Supabase
       );
 
       setMessages(prev => [...prev, {
