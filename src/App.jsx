@@ -10,7 +10,7 @@ import ProfilePage from './pages/Profile'
 import WorkoutPage from './pages/WorkoutPage'
 import FitAI from './pages/FitAI'
 import { ActivityProvider } from './context/ActivityContext'
-import SupabaseDebugPanel from './components/SupabaseDebugPanel'
+
 import { notificationEngine } from './lib/NotificationEngine'
 import { useEffect } from 'react'
 import './index.css'
@@ -99,7 +99,7 @@ function AppRoutes() {
       </div>
       <BottomNav />
       {/* Temporary debug panel — remove once Supabase is confirmed working */}
-      <SupabaseDebugPanel />
+
     </div>
   )
 }
