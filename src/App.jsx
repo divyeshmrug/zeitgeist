@@ -60,8 +60,6 @@ function AppRoutes() {
     if (user) {
       notificationEngine.init(user.id).then(() => {
         notificationEngine.listenForServerPushes();
-        // Kick off smart background intervals
-        notificationEngine.scheduleNightRoutine(22, 30);
       })
     }
   }, [user])
